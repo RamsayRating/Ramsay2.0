@@ -27,6 +27,7 @@ def what_object(img_name):
     labels = response.label_annotations
 
     # Gets first element
-    return labels[9].score
+    return labels[9s].score
 
 if __name__ == '__main__':
+    print('Top score: ' + str(what_object('RedApple.jpg')))
