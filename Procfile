@@ -1,1 +1,1 @@
-web: python run.py
+web: gunicorn herokuflask:app --log-file=-
