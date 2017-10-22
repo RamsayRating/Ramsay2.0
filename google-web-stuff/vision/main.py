@@ -50,9 +50,8 @@ def upload_photo():
             tweet = retrieve_tweet_database(conn,1.0)
         else:
             tweet = retrieve_tweet_database(conn,2.0)
-        print(tweet)
 
-    return render_template('secondpagxe.html')
+    return render_template('secondpage.html', tweet=tweet)
 
 
 @app.errorhandler(500)
