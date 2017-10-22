@@ -1,15 +1,37 @@
-<h1>Google Cloud Platform - Vision Sample</h1>
-
-<p>This Python Flask application demonstrates App Engine Flexible, Cloud Storage, Vision API, and Datastore.</p>
-
-<br>
-
+<!DOCTYPE html>
 <html>
-  <body>
-    <form action="upload_photo" method="POST" enctype="multipart/form-data">
-      Upload File: <input type="file" name="file"><br>
-      <input type="submit" name="submit" value="Submit">
-    </form>
+<title>Enter page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
-  </body>
-</html> 
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('/Ramsay2.0/google-web-stuff/vision/templates/ramsayFace.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">The Ramsay Rating</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">Upload a picture of your food. Hear what Gordon Ramsay might have to say about it.</p>
+</div>
+
+<body>
+  <form action="upload_photo" method="POST" enctype="multipart/form-data">
+    Upload File: <input type="file" name="file"><br>
+    <input type="submit" name="submit" value="Submit">
+  </form>
+  {% for image_entity in image_entities %}
+    <img src="{{image_entity['image_public_url']}}" width=200 height=200>
+    <p>Top Label Detected using Vision API: {{image_entity['label']}}</p>
+{% endfor %}
+</body>
+</html>
