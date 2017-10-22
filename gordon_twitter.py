@@ -2,7 +2,6 @@
 import twitter
 import sqlite3
 from sqlite3 import Error
-from mongoengine import *
 import os.path
 import random
 import numpy as np
@@ -102,7 +101,7 @@ def sentiment_analysis(name, conn):
 	l = open(name + '.txt')
 	lines = l.readlines()
 	l.close()
-	feel_dict = {'':0.0,'Anger':1.0,'Fear':2.0, 'Sadness':3.0, 'Disgust':4.0,'Joy':5.0, 'Excitement':6.0}
+	feel_dict = {'':0.0,'Anger':2.0,'Fear':2.0, 'Sadness':2.0, 'Disgust':2.0,'Joy':1.0, 'Excitement':1.0}
 	for i in lines:
 		max_score = 0.0
 		max_feel = ''
@@ -158,5 +157,5 @@ def retrieve_tweet_database(conn, rating):
 conn = connect_to_database()
 #select_all_tweets(conn)
 #sentiment_analysis('GordonRamsay', conn)
-print(retrieve_tweet_database(conn, 2.0))
+#print(retrieve_tweet_database(conn, 2.0))
 
