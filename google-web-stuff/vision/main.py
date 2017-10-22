@@ -2,7 +2,8 @@ import base64
 import os
 
 from flask import Flask, redirect, render_template, request
-
+from food_recognition import what_object
+from gordon_twitter import retrieve_tweet_database, connect_to_database
 from werkzeug.utils import secure_filename
 
 #CHANGE THIS TO YOUR OWN PATH
@@ -42,7 +43,16 @@ def upload_photo():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-    return render_template('secondpage.html')
+        score = what_object(name_file)
+        conn = connect_to_database()
+        tweet = ''
+        if score > 0.75:
+            tweet = retrieve_tweet_database(conn,1.0)
+        else:
+            tweet = retrieve_tweet_database(conn,2.0)
+
+
+    return render_template('secondpagxe.html')
 
 
 @app.errorhandler(500)
