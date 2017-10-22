@@ -1,1 +1,1 @@
-web: python3 herokuflask.py
+web: gunicorn herokuflask:app

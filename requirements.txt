@@ -1,4 +1,5 @@
 docutils==0.13.1
+gunicorn==19.7.1
 Flask==0.12.2
 Flask-Cors==3.0.2
 gapic-google-cloud-datastore-v1==0.15.3
