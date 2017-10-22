@@ -1,1 +1,1 @@
-web: python herokuflask.py
+web: python3 herokuflask.py
