@@ -2,8 +2,8 @@ import base64
 import os
 
 from flask import Flask, redirect, render_template, request
-from Ramsay2.food_recognition import what_object
-from .gordon_twitter import retrieve_tweet_database, connect_to_database
+from food_recognition import what_object
+from gordon_twitter import retrieve_tweet_database, connect_to_database
 from werkzeug.utils import secure_filename
 
 #CHANGE THIS TO YOUR OWN PATH
@@ -17,7 +17,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/')
 def homepage():
     # Return a Jinja2 HTML template.
-    return render_template('homepage.html', image_entities=image_entities)
+    return render_template('homepage.html')
 
 
 def allowed_file(filename):
@@ -43,16 +43,15 @@ def upload_photo():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        score = what_object(name_file)
-        conn = connect_to_database()
-        tweet = ''
-        if score > 0.75:
-            tweet = retrieve_tweet_database(conn,1.0)
-        else:
-            tweet = retrieve_tweet_database(conn,2.0)
-        print(tweet)
+            score = what_object(file.filename)
+            conn = connect_to_database()
+            tweet = ''
+            if score > 0.75:
+                tweet = retrieve_tweet_database(conn,1.0)
+            else:
+                tweet = retrieve_tweet_database(conn,2.0)
 
-    return render_template('secondpagxe.html')
+    return render_template('secondpage.html')
 
 
 @app.errorhandler(500)
